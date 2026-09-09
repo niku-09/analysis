@@ -1,0 +1,66 @@
+==============================================
+ scr_fix_final
+ RUN_MODE = 0
+ source   = C:\Users\nikhil.mohan\Desktop\Analysis testing\testinggg-004.f06
+ (auto-selected as newest .f06 in C:\Users\nikhil.mohan\Desktop\Analysis testing\)
+==============================================
+
+--- Step A: reading solver log ---
+  UFM 4296 illegal winding messages : 404
+  UFM 4297 folded >=180 messages    : 402
+  UFM 4558 bad TRIA3 messages       : 162
+  unique elements to examine        : 887
+
+--- Step B: measuring against live model ---
+  COLLAPSED  (-> CTRIA3, automatic)  : 322
+  BOWTIE     (-> reorder, automatic) : 143
+  SLIVER     (manual remesh)         : 6
+  LINE       (manual delete)         : 406
+  BAD_TRIA   (manual remesh)         : 10
+  CLEAN      (no longer failing)     : 0
+  UNREADABLE (inspect by hand)       : 0
+
+  automatic : 465
+  manual    : 422
+
+--- Step C: where to look ---
+  affected properties: 11
+
+  properties with the most damage:
+    Prop 3  -  359 bad  (205 auto, 154 manual)
+    Prop 22  -  128 bad  (2 auto, 126 manual)
+    Prop 7  -  122 bad  (83 auto, 39 manual)
+    Prop 8  -  60 bad  (29 auto, 31 manual)
+    Prop 17  -  56 bad  (27 auto, 29 manual)
+    Prop 14  -  49 bad  (23 auto, 26 manual)
+    Prop 6  -  48 bad  (38 auto, 10 manual)
+    Prop 2  -  42 bad  (36 auto, 6 manual)
+    Prop 10  -  16 bad  (16 auto, 0 manual)
+    Prop 4  -  5 bad  (4 auto, 1 manual)
+    ... and 1 more properties, see CSV
+
+  Full table in where_to_look.csv.
+  A SMALL span on a property = one localized sliver region.
+  A LARGE span = the whole part meshed badly.
+
+--- Step E: summary ---
+  (group FIX_MANUAL_REVIEW not created - CSV lists still valid)
+  (group FIX_AUTOMATIC not created - CSV lists still valid)
+
+  REPORT ONLY. Nothing was changed.
+
+  Next:
+    1. Open where_to_look.csv. Which properties are hit?
+    2. Decide: is this secondary structure (patch and move
+       on) or primary connections (fix the CAD properly)?
+    3. Save a backup copy of the model.
+    4. BACKUP_DONE = 1, RUN_MODE = 1. Inspect the two
+       elements it changes.
+    5. If they look right, RUN_MODE = 2.
+
+  Files in C:\Users\nikhil.mohan\Desktop\Analysis testing\audit\
+    where_to_look.csv    <- read this first
+    classification.csv   <- every element, verdict, location
+    scr_fix_final.log    <- this file
+
+  Analysed: C:\Users\nikhil.mohan\Desktop\Analysis testing\testinggg-004.f06
